@@ -1,10 +1,14 @@
 package com.pascualteam.javaproject.controller;
 
-import com.pascualteam.javaproject.model.repository.User;
-import com.pascualteam.javaproject.model.repository.UserRepository;
+import com.pascualteam.javaproject.model.HttpResponse;
+import com.pascualteam.javaproject.model.User;
+import com.pascualteam.javaproject.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.NoSuchElementException;
 
 @RestController 	// This means that this class is a Controller
 @RequestMapping(path="/userAPI") // This means URL's start with /demo (after Application path)
@@ -15,32 +19,38 @@ public class MainController {
 	private UserRepository userRepository;
 
 	@PostMapping(path="/save")
-	public User save(@RequestBody User user) {
+	public HttpResponse save(@RequestBody User user) {
+
 		User obj = userRepository.save(user);
-		return obj;
-	}
+		List<User> userList = new ArrayList<>();
+		userList.add(obj);
 
-	@PostMapping(path="/add") // Map ONLY POST Requests
-	public @ResponseBody String addNewUser (@RequestParam String firstname
-			, @RequestParam String email) {
-		// @ResponseBody means the returned String is the response, not a view name
-		// @RequestParam means it is a parameter from the GET or POST request
-
-		User n = new User();
-		n.setFirstname(firstname);
-		n.setEmail(email);
-		userRepository.save(n);
-		return "Saved";
+		return new HttpResponse(userList, "User saved succesfully", true);
 	}
 
 	@GetMapping(path="/all")
-	public @ResponseBody Iterable<User> getAllUsers() {
-		// This returns a JSON or XML with the users
-		return userRepository.findAll();
+	public HttpResponse getAllUsers() {
+		List<User> userList = new ArrayList<>();
+		userRepository.findAll().forEach(userList::add);
+
+		return new HttpResponse(userList, "Users found succesfully", true);
 	}
 
 	@GetMapping(path="/user/{id}")
-	public User getById(@PathVariable Integer id) {
-		return userRepository.findById(id).get();
+	public HttpResponse getById(@PathVariable Integer id) {
+		try {
+			User obj = userRepository.findById(id).get();
+			List<User> userList = new ArrayList<>();
+			userList.add(obj);
+
+			return new HttpResponse(userList, "User got succesfully", true);
+		} catch (NoSuchElementException e){
+			System.out.println(e.toString());
+			return new HttpResponse(null, "User not found", false);
+
+		}catch (Exception e){
+			return new HttpResponse(null, "User not found", false);
+		}
+
 	}
 }

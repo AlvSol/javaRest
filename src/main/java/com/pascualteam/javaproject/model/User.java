@@ -1,4 +1,4 @@
-package com.pascualteam.javaproject.model.repository;
+package com.pascualteam.javaproject.model;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -75,5 +75,16 @@ public class User {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	@Override
+	public String toString() {
+		return "User{" +
+				"\"id\": \"" + id +
+				"\", \"firstname\": \"" + firstname +
+				"\", \"lastname\": \"" + lastname +
+				"\", \"phoneNumber\": \"" + phoneNumber +
+				"\", \"email\": \"" + email +
+				"\"}";
 	}
 }

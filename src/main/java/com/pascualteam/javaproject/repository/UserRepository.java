@@ -1,6 +1,6 @@
-package com.pascualteam.javaproject.model.repository;
+package com.pascualteam.javaproject.repository;
 
-import com.pascualteam.javaproject.model.repository.User;
+import com.pascualteam.javaproject.model.User;
 import org.springframework.data.repository.CrudRepository;
 
 
