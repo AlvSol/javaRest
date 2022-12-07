@@ -4,10 +4,8 @@ import java.util.List;
 
 public class HttpResponse {
 
-    private String message;
-
     private List<User> data;
-
+    private String message;
     private boolean success;
 
     public HttpResponse(List<User> data, String message, boolean success) {

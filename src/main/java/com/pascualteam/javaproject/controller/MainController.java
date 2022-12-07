@@ -1,5 +1,8 @@
 package com.pascualteam.javaproject.controller;
 
+import com.pascualteam.javaproject.exceptions.EmptyException;
+import com.pascualteam.javaproject.exceptions.FormatException;
+import com.pascualteam.javaproject.exceptions.LengthException;
 import com.pascualteam.javaproject.model.HttpResponse;
 import com.pascualteam.javaproject.model.User;
 import com.pascualteam.javaproject.repository.UserRepository;
@@ -21,11 +24,21 @@ public class MainController {
 	@PostMapping(path="/save")
 	public HttpResponse save(@RequestBody User user) {
 
-		User obj = userRepository.save(user);
-		List<User> userList = new ArrayList<>();
-		userList.add(obj);
+		try {
+			user.validate();
+			userRepository.findById(user.getId());
 
-		return new HttpResponse(userList, "User saved succesfully", true);
+			return new HttpResponse(new ArrayList<User>(), "User already exists", false);
+		} catch (EmptyException | FormatException | LengthException e) {
+			return new HttpResponse(new ArrayList<User>(), e.getMessage(), false);
+		} catch (Exception e) {
+			User obj = userRepository.save(user);
+			List<User> userList = new ArrayList<>();
+			userList.add(obj);
+
+			return new HttpResponse(userList, "User saved succesfully", true);
+		}
+
 	}
 
 	@GetMapping(path="/all")
