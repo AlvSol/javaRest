@@ -1,0 +1,39 @@
+.input-form {
+  border: 1px solid lightgray;
+  border-radius: 5px;
+  outline: none;
+}
+input {
+  border: 1px solid gray;
+  border-radius: 6px;
+  position: relative;
+  width: 200px;
+  margin: 10px;
+  line-height: 6ex;
+}
+
+.input-wrapper {
+  position: relative;
+}
+.input-wrapper:focus-within > input {
+  border: 2px solid blue;
+  border-radius: 5px;
+}
+.input-wrapper:focus-within > input::placeholder {
+  color: transparent;
+}
+.input-wrapper:focus-within > label {
+  visibility: visible;
+}
+
+.label {
+  color: blue;
+  visibility: hidden;
+  font-size: 10px;
+  position: absolute;
+  top: 0.5ex;
+  z-index: 1;
+  background-color: white;
+  padding: 0 5px;
+  margin: 0px 20px;
+}

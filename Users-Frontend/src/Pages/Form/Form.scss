@@ -1,0 +1,36 @@
+.mainForm {
+  align-items: center;
+  justify-content: center;
+}
+
+input.submitBtn {
+  background-color: blue;
+  color: white;
+  width: 50%;
+}
+
+input {
+  text-indent: 5px;
+}
+.signLog{
+  display: flex;
+  justify-content: center;
+  text-align: center;
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.textInputs{
+  padding: 0 3vw 1vw 3vw;
+}
+.formButtons{
+  margin-top: 3vh;
+  display: flex;
+  justify-content: center;
+}
+.submitBtn{
+  margin: 0 1vw 0 1vw !important;
+}
