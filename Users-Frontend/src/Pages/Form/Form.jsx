@@ -39,7 +39,6 @@ function Form({handleClosePopup}) {
   const Submit = () => {
     console.log(form_firstname);
     
-    if(submitForm){
       console.log("wewe")
       axios({
         method: 'post',
@@ -54,13 +53,14 @@ function Form({handleClosePopup}) {
         console.log(response.data.message);
         console.log(form_firstname);
       })
-    }
+    
     handleClosePopup();
   }
 
   function SetAllData(value){
     submitForm = value;
   }
+
 
   return (
     <form className="mainForm">
@@ -82,7 +82,7 @@ function Form({handleClosePopup}) {
         className="submitBtn"
         type="button"
         value="Save"
-        onClick={Submit}
+        onClick={() => {setSubmitform(!submitForm)}}
         
       >Submit</Button>
       <Button variant="outlined"  

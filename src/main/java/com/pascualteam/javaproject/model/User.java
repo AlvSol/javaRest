@@ -4,11 +4,14 @@ import com.pascualteam.javaproject.exceptions.EmptyException;
 import com.pascualteam.javaproject.exceptions.FormatException;
 import com.pascualteam.javaproject.exceptions.LengthException;
 import jakarta.persistence.*;
+import org.springframework.boot.autoconfigure.domain.EntityScan;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 @Entity // This tells Hibernate to make a table out of this class
+@EntityScan
+@Table(name = "user")
 public class User {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
@@ -116,7 +119,7 @@ public class User {
 			throw new FormatException("Email does not match the format");
 		}
 
-		Pattern patternPhone = Pattern.compile("^[\\+]?[(]?[0-9]{3}[)]?[-\\s\\.]?[0-9]{3}[-\\s\\.]?[0-9]{4,6}$");
+		Pattern patternPhone = Pattern.compile("[0-9]+");
 		Matcher matPhone = patternPhone.matcher(this.phoneNumber);
 
 		if(!matPhone.matches()) {
