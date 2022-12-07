@@ -9,7 +9,7 @@ import TextField from '@mui/material/TextField';
 
 import Button from '@mui/material/Button';
 
-function Form({handleClosePopup}) {
+function Form({updateArray, handleClosePopup}) {
   
   const [form_firstname, setFirstname] = React.useState("");
   const [form_lastname, setLastname] = React.useState("");
@@ -52,6 +52,12 @@ function Form({handleClosePopup}) {
       }).then(response=>{
         console.log(response.data.message);
         console.log(form_firstname);
+        updateArray({
+          firstname:form_firstname,
+          lastname: form_lastname,
+          phoneNumber: form_phoneNumber,
+          email: form_email
+        })
       })
     
     handleClosePopup();

@@ -43,6 +43,11 @@ function Main(){
 
     const [open, setOpen] = React.useState(false);
     const [users, setUsers] = useState([]);
+
+    const updateArray = (usernew) => {
+        const newarray = [...users, usernew];
+        setUsers(newarray);
+    }
     
     const handleClickOpen = () => {
         setOpen(true);
@@ -74,7 +79,7 @@ function Main(){
                     >
                         <DialogTitle id="alert-dialog-title"> {"Login"} </DialogTitle>
                         <DialogContent>
-                            <Form handleClosePopup={handleClose}/>
+                            <Form updateArray={updateArray} handleClosePopup={handleClose}/>
                         </DialogContent>
                     </Dialog>
             </div>
