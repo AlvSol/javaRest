@@ -30,6 +30,8 @@ public class JavaprojectApplication implements CommandLineRunner {
 	public void createUsers() {
 		userRepository.save(new User("Juan", "Torres", "8974562924", "jtorres@gmail.com"));
 		userRepository.save(new User("Mike", "Johnson", "4568562924", "mikej@gmail.com"));
+		userRepository.save(new User("David", "Garcia", "7338562492", "davidGarcia@outlook.com"));
+		userRepository.save(new User("Timmy", "Thomson", "7459579543", "timmy32@gmail.com"));
 
 	}
 }
